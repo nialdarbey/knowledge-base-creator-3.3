@@ -1,0 +1,189 @@
+<html>
+<head>
+<link href="css/south-street/jquery-ui-1.8.20.custom.css" rel="stylesheet" type="text/css" />
+<link href="css/estore.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<style type="text/css">
+
+h1 {
+    text-align: center;
+}
+
+div#tabs {
+	width: 98%;
+	height: 550px;
+}
+
+.headers {
+    font-weight: bold;
+}
+
+#initial-list {
+    height: 7em;
+    overflow: scroll;
+    border: 1px solid gray;
+    margin-bottom: 0.5em;
+    padding: 0.25em;
+}
+
+.selectable, .selected {
+    padding: 0em 0.10em;
+}
+
+.detail {
+    height: 18em;
+    overflow: scroll;
+    border: 1px solid gray;
+    padding: 0.25em;
+}
+
+.selectable:hover {
+    background-color: yellow;
+    cursor: pointer;
+} 
+
+.selected {
+    background-color: blue;
+    color: white;
+}   
+
+.toolbar {
+    margin-left: 1em;
+}
+
+.main {
+    margin: 1em;
+}
+
+</style>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="mule-resource/js/mule.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" ></script>
+<script type="text/javascript">
+	
+	function htmlEncode(value){
+  		return $('<div/>').text(value).html();
+	}
+	
+	function clearAll() {
+	  $('#initial-list div').remove();
+	}
+	
+	function findReplies(id) {
+	  var search = {
+      	refId : id
+      }
+      request = JSON.stringify(search);
+      mule.rpc('/emails/reply', request, function(message) {
+      	var replies = JSON.parse(message.data);
+        $.each(replies, function(index, reply) {
+            $('#reply-list div').remove();
+        	$('#reply-list').prepend('<div id="' + reply.messageId + '" class="selectable">' + htmlEncode(reply.from) + '</div>');
+        	$('#reply-list div.selectable').click(function() {
+        	  if ($(this).hasClass('selected')) {
+                return;
+              }
+        	  $(this).addClass('selected').removeClass('selectable').siblings().removeClass('selected').addClass('selectable');
+              var id = $(this).attr('id');
+              search = {
+                messageId : id
+              }
+              var request = JSON.stringify(search);
+              mule.rpc('/emails/reply/body', request, function(message) {
+                var emailObject = JSON.parse(message.data);
+                $('#reply-text').text(emailObject.email);
+              });
+            });
+        });
+      });
+	}	
+      
+    function findBody(id) {
+      	var search = {
+          messageId : id
+        }
+        var request = JSON.stringify(search);
+        mule.rpc('/emails/initial/body', request, function(message) {
+          var emailObject = JSON.parse(message.data);
+          $('#initial-text').text(emailObject.email);
+        });
+    }
+      
+    function setupInitialClickHandler() {
+      $('#initial-list div.selectable').click(function() {
+            if ($(this).hasClass('selected')) {
+              return;
+            }
+            $(this).addClass('selected').removeClass('selectable').siblings().removeClass('selected').addClass('selectable');
+            var id = $(this).attr('id');
+            findBody(id);
+            findReplies(id);
+       });
+    }
+	
+	function findInitials() {
+		var search = {
+	    	refId : 'NA'
+	  	}
+	    var request = JSON.stringify(search);
+	    mule.rpc("/emails/initial", request, function(message){
+	      emails = JSON.parse(message.data);
+	      $('#initial-list div').remove();
+	      $.each(emails, function(index, email) {
+	        	$('#initial-list').prepend('<div class="row-fluid selectable" id="' + email.messageId + '"><div class="span4">' + new Date(email.date) + '</div><div class="span2">' + email.from + '</div><div class="span5">' + email.subject + '</div><div class="span1">' + email.status + '</div></div>');
+	      });
+	      setupInitialClickHandler();
+	    });
+	}
+	
+	$(document).ready(function() {
+	  	dojo.addOnLoad(function() {
+	  		clearAll();
+			findInitials();
+	  	});
+	  	
+    });
+	
+</script>
+</head>
+<body>
+    <div class="page-header">
+        <h1>Knowledge Base Creator</h1>
+    </div>
+    <div class="toolbar">
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <button id="refreshButton" class="btn">Refresh</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid well main" >
+        <div class="row-fluid headers" >
+            <div class="span4">Date</div>
+            <div class="span2">Account Executive</div>
+            <div class="span5">Subject</div>
+            <div class="span1">Status</div>
+        </div>
+        <div id="initial-list">
+           
+        </div>
+        <div class="row-fluid headers">
+            <div class="span5">Initial Body</div>
+            <div class="span2">Replied By</div>
+            <div class="span5">Reply Body</div>
+        </div>
+        <div class="row-fluid">
+            <div id="initial-text" class="span5 detail">
+                
+            </div>
+            <div id="reply-list" class="span2 detail">
+            
+            </div>
+            <div id="reply-text" class="span5 detail">
+            
+            </div>
+        </div>
+    </div>
+</body>
+</html>

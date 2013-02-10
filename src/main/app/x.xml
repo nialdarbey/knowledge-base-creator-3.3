@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:smtps="http://www.mulesoft.org/schema/mule/smtps" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:getsatisfaction="http://www.mulesoft.org/schema/mule/getsatisfaction" xmlns:quartz="http://www.mulesoft.org/schema/mule/quartz" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:debugger="http://www.mulesoft.org/schema/mule/debugger" xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:imaps="http://www.mulesoft.org/schema/mule/imaps" xmlns:ajax="http://www.mulesoft.org/schema/mule/ajax" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:pop3s="http://www.mulesoft.org/schema/mule/pop3s" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.4.0"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd 
+http://www.mulesoft.org/schema/mule/ajax http://www.mulesoft.org/schema/mule/ajax/current/mule-ajax.xsd 
+http://www.mulesoft.org/schema/mule/pop3s http://www.mulesoft.org/schema/mule/pop3s/current/mule-pop3s.xsd 
+http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd 
+http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/quartz/current/mule-quartz.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/smtps http://www.mulesoft.org/schema/mule/smtps/current/mule-smtps.xsd 
+http://www.mulesoft.org/schema/mule/smtp s 
+http://www.mulesoft.org/schema/mule/getsatisfaction http://www.mulesoft.org/schema/mule/getsatisfaction/1.0/mule-getsatisfaction.xsd 
+http://www.mulesoft.org/schema/mule/debugger http://www.mulesoft.org/schema/mule/debugger/current/mule-debugger.xsd 
+http://www.mulesoft.org/schema/mule/imaps http://www.mulesoft.org/schema/mule/imaps/current/mule-imaps.xsd 
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd ">
+	<!-- <custom-agent class="com.mulesoft.mule.debugger.server.DebuggerAgent" name="debuggerAgent"/> -->
+	<ajax:connector name="ajaxServer" serverUrl="http://0.0.0.0:8090/knowledgeBase" resourceBase="${app.home}/docroot" jsonCommented="true" doc:name="Ajax" />
+	<spring:beans>
+		<spring:bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<spring:property name="locations">
+				<spring:list>
+					<spring:value>classpath:/config.properties</spring:value>
+				</spring:list>
+			</spring:property>
+		</spring:bean>
+	</spring:beans>
+	<mongo:config name="Mongo_DB" username="nialdarbey" password="hello123" host="alex.mongohq.com" port="10036" database="se_knowledge_base" doc:name="Mongo DB" />
+	<pop3s:connector name="POP3" checkFrequency="10000" validateConnections="true" deleteReadMessages="false" doc:name="POP3" />
+	<flow name="main" doc:name="main">
+		<pop3s:inbound-endpoint host="pop.gmail.com" port="995" user="${email.user}" password="${email.password}" responseTimeout="10000" connector-ref="POP3" doc:name="pre-sales" />
+		<flow-ref name="make_document" doc:name="Make Document" />
+		<logger message="#[payload]" level="INFO" doc:name="Logger" />
+		<mongo:insert-object config-ref="Mongo_DB" collection="emails" doc:name="Insert Email" />
+	</flow>
+	<sub-flow name="make_document" doc:name="make_document">
+		<choice doc:name="Choice">
+			<when expression="#[message.outboundProperties['References'] == null]">
+				<processor-chain>
+					<set-variable variableName="refId" value="NA" doc:name="refId" />
+				</processor-chain>
+			</when>
+			<otherwise>
+				<processor-chain>
+					<set-variable variableName="refId" value="#[refs = message.outboundProperties['References']; refArray = refs.split('\t'); refArray[0]]" doc:name="refId" />
+				</processor-chain>
+			</otherwise>
+		</choice>
+		<set-variable variableName="messageId" value="#[header:outbound:Message-ID]" doc:name="messageId" />
+		<set-variable variableName="from" value="#[header:outbound:inbound.fromAddress]" doc:name="from" />
+		<set-variable variableName="subject" value="#[header:outbound:inbound.subject]" doc:name="subject" />
+		<logger message="#[flowVars.subject]" level="INFO" doc:name="Logger" />
+		<set-variable variableName="date" value="#[header:outbound:sentDate]" doc:name="date" />
+		<expression-transformer expression="#[ with (document = new com.mulesoft.se.knowledge.Document()) { email = message.payload, subject = flowVars.subject, messageId = flowVars.messageId, refId = flowVars.refId, date = flowVars.date, from = flowVars.from }; document ]" doc:name="Transform to Document" />
+		<json:object-to-json-transformer doc:name="Object to JSON" />
+	</sub-flow>
+	<flow name="find_initial_body" doc:name="find_initial_body">
+		<ajax:inbound-endpoint channel="/emails/initial/body" responseTimeout="10000" doc:name="/emails/initial/body" />
+		<flow-ref name="find_body" doc:name="Find Email Body" />
+	</flow>
+	<flow name="find_reply_body" doc:name="find_reply_body">
+		<ajax:inbound-endpoint channel="/emails/reply/body" responseTimeout="10000" doc:name="/emails/reply/body" />
+		<flow-ref name="find_body" doc:name="Find Email Body" />
+	</flow>
+	<sub-flow name="find_body" doc:name="find_body">
+		<mongo:find-one-object config-ref="Mongo_DB" collection="emails" doc:name="Find Email Body">
+			<mongo:fields>
+				<mongo:field>email</mongo:field>
+			</mongo:fields>
+		</mongo:find-one-object>
+		<mongo:dbobject-to-json doc:name="Transform to JSON" />
+	</sub-flow>
+	<flow name="find_initial_emails" doc:name="find_initial_emails">
+		<ajax:inbound-endpoint channel="/emails/initial" responseTimeout="10000" doc:name="/emails/initial" />
+		<mongo:find-objects query-ref="#[payload]" config-ref="Mongo_DB" collection="emails" doc:name="Find Initial Emails">
+			<mongo:fields>
+				<mongo:field>messageId</mongo:field>
+				<mongo:field>from</mongo:field>
+				<mongo:field>date</mongo:field>
+				<mongo:field>subject</mongo:field>
+			</mongo:fields>
+		</mongo:find-objects>
+		<mongo:mongo-collection-to-json doc:name="Transform to Json" />
+		<logger message="#[payload]" level="INFO" doc:name="Logger" />
+	</flow>
+	<flow name="find_initial_emailsXXX" doc:name="find_initial_emails">
+		<quartz:inbound-endpoint jobName="initialEmail" repeatInterval="2000000" responseTimeout="10000" doc:name="Generate { &quot;refId&quot; : &quot;NA&quot; }">
+			<quartz:event-generator-job groupName="initialEmail" jobGroupName="initialEmail">
+				<quartz:payload>{ "refId" : "NA" }</quartz:payload>
+			</quartz:event-generator-job>
+		</quartz:inbound-endpoint>
+		<mongo:find-objects query-ref="#[payload]" config-ref="Mongo_DB" collection="emails" doc:name="Find Initial Emails">
+			<mongo:fields>
+				<mongo:field>messageId</mongo:field>
+				<mongo:field>from</mongo:field>
+				<mongo:field>date</mongo:field>
+				<mongo:field>subject</mongo:field>
+			</mongo:fields>
+
+		</mongo:find-objects>
+		<mongo:mongo-collection-to-json doc:name="Transform to Json" />
+		<logger message="#[payload]" level="INFO" doc:name="Logger" />
+		<ajax:outbound-endpoint channel="/emails/initial/xxx" responseTimeout="10000" doc:name="/emails/initial" />
+	</flow>
+	<flow name="find_reply_emails" doc:name="find_reply_emails">
+		<ajax:inbound-endpoint channel="/emails/reply" responseTimeout="10000" doc:name="/emails/reply" />
+		<mongo:find-objects query-ref="#[payload]" config-ref="Mongo_DB" collection="emails" doc:name="Find Reply Emails">
+			<mongo:fields>
+				<mongo:field>messageId</mongo:field>
+				<mongo:field>from</mongo:field>
+			</mongo:fields>
+
+		</mongo:find-objects>
+		<mongo:mongo-collection-to-json doc:name="Transform to Json" />
+	</flow>
+
+</mule>

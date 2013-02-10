@@ -1,0 +1,60 @@
+h3   {
+    text-align: center;
+}
+
+div#tabs {
+	width: 98%;
+	height: 550px;
+}
+
+.headers {
+    font-weight: bold;
+}
+
+#initial-list {
+    height: 7em;
+    overflow: scroll;
+    border: 1px solid gray;
+    margin-bottom: 0.5em;
+    padding: 0.25em;
+}
+
+.selectable, .selected {
+    padding: 0em 0.10em;
+}
+
+.view {
+    height: 30em;
+}
+
+.text {
+    height: 12em;
+}
+
+.box {
+    overflow: scroll;
+    border: 1px solid gray;
+    padding: 0.25em;
+}
+
+.selectable:hover {
+    cursor: pointer;
+    color: blue;
+} 
+
+.selected:hover {
+    color: blue;
+}
+
+.selected {
+    background-color: blue;
+    color: yellow;
+}   
+
+.toolbar {
+    margin-left: 1em;
+}
+
+.main {
+    margin: 1em;
+}

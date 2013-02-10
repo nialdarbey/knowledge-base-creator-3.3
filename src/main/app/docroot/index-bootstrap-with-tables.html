@@ -1,0 +1,222 @@
+<html>
+<head>
+<link href="css/south-street/jquery-ui-1.8.20.custom.css" rel="stylesheet" type="text/css" />
+<link href="css/estore.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<style type="text/css">
+
+h3   {
+    text-align: center;
+}
+
+div#tabs {
+	width: 98%;
+	height: 550px;
+}
+
+.headers {
+    font-weight: bold;
+}
+
+#initial-list {
+    height: 7em;
+    overflow: scroll;
+    border: 1px solid gray;
+    margin-bottom: 0.5em;
+    padding: 0.25em;
+}
+
+.selectable, .selected {
+    padding: 0em 0.10em;
+}
+
+.view {
+    height: 30em;
+}
+
+.text {
+    height: 12em;
+}
+
+.box {
+    overflow: scroll;
+    border: 1px solid gray;
+    padding: 0.25em;
+}
+
+.selectable:hover {
+    cursor: pointer;
+    color: blue;
+} 
+
+.selected:hover {
+    color: blue;
+}
+
+.selected {
+    background-color: blue;
+    color: yellow;
+}   
+
+.toolbar {
+    margin-left: 1em;
+}
+
+.main {
+    margin: 1em;
+}
+
+</style>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="mule-resource/js/mule.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="js/timeago.js"></script>
+<script type="text/javascript">
+	
+	function htmlEncode(value){
+  		return $('<div/>').text(value).html();
+	}
+	
+	function clearAll() {
+	  $('#initial-list div').remove();
+	}
+	
+	function findReplies(id) {
+	  var search = {
+      	refId : id
+      }
+      request = JSON.stringify(search);
+      mule.rpc('/emails/reply', request, function(message) {
+      	var replies = JSON.parse(message.data);
+        $.each(replies, function(index, reply) {
+            $('#reply-list div').remove();
+        	$('#reply-list').prepend('<div id="' + reply.messageId + '" class="selectable">' + htmlEncode(reply.from) + '</div>');
+        	$('#reply-list div.selectable').click(function() {
+        	  if ($(this).hasClass('selected')) {
+                return;
+              }
+        	  $(this).addClass('selected').removeClass('selectable').siblings().removeClass('selected').addClass('selectable');
+              var id = $(this).attr('id');
+              search = {
+                messageId : id
+              }
+              var request = JSON.stringify(search);
+              mule.rpc('/emails/reply/body', request, function(message) {
+                var emailObject = JSON.parse(message.data);
+                $('#reply-text').text(emailObject.email);
+              });
+            });
+        });
+      });
+	}	
+      
+    function findBody(id, selector) {
+      	var search = {
+          messageId : id
+        }
+        var request = JSON.stringify(search);
+        mule.rpc('/emails/initial/body', request, function(message) {
+          var emailObject = JSON.parse(message.data);
+          $(selector).text(emailObject.email);
+        });
+    }
+      
+    function setupInitialClickHandler() {
+      $('#initial-list tr').click(function() {
+            if ($(this).hasClass('selected')) {
+              return;
+            }
+            $(this).addClass('selected').removeClass('selectable').siblings().removeClass('selected').addClass('selectable');
+            var id = $(this).attr('id');
+            findBody(id, '#initial-text');
+            findReplies(id);
+       });
+    }
+	
+	function findInitials() {
+		var search = {
+	    	refId : 'NA'
+	  	}
+	    var request = JSON.stringify(search);
+	    mule.rpc("/emails/initial", request, function(message){
+	      emails = JSON.parse(message.data);
+	      $('#initial-list tbody tr').remove();
+	      $.each(emails, function(index, email) {
+	        	$('#initial-list').prepend('<tr class="selectable" id="' + email.messageId + '"><td><abbr class="timeago" title="' + new Date(email.date) +'">' + new Date(email.date) + '</abbr></td><td>' + email.from + '</td><td>' + email.subject + '</td><td>' + email.status + '</td></tr>');
+	      });
+	      $('abbr.timeago').timeago();
+	      setupInitialClickHandler();
+	      
+	    });
+	}
+	
+	$(document).ready(function() {
+	  	//$('#refreshButton').click(function() {
+	  	dojo.addOnLoad(function() {
+	  		clearAll();
+			findInitials();
+	  	});
+    });
+	
+</script>
+</head>
+<body>
+    <div class="page-header">
+        <h3>Knowledge Base Creator</h3>
+    </div>
+    <div class="toolbar">
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <button id="refreshButton" class="btn">Refresh</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid main well" >
+        <div class="row-fluid">
+            <div class="span3 view box">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>AE</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="initial-list">
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="span6 view">
+                <div class="container-fluid view">
+                    <div class="row-fluid">
+                        <div id="initial-text" class="span12 text box">x</div>
+                            
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 text">
+                            <div class="container-fluid">
+                                <div class="row-fluid">
+                                    <div id="reply-list" class="span3">x
+                                    </div>
+                                    <div id="reply-text" class="span9">y</div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            <div class="span3 view box">
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="x">
+    <global-element type="org.mule.tooling.ui.modules.core.global.ajaxConnector" name="Ajax" entity-id="Ajax#1">
+        <properties>
+            <property value="ajaxServer" name="name"/>
+            <property value="http://0.0.0.0:8090/knowledgeBase" name="serverUrl"/>
+            <property value="${app.home}/docroot" name="resourceBase"/>
+            <property name="disableReplyTo"/>
+            <property value="1" name="auxiliary;index"/>
+            <property name="logLevel"/>
+            <property name="refsThreshold"/>
+            <property value="true" name="jsonCommented"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+            <property name="timeout"/>
+            <property name="interval"/>
+            <property name="maxInterval"/>
+            <property name="multiFrameInterval"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;index"/>
+        </properties>
+    </global-element>
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="Bean" entity-id="Bean#1">
+        <properties>
+            <property value="propertyPlaceholderConfigurer" name="id"/>
+            <property name="name"/>
+            <property value="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" name="class"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="children"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;wrapIn"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;wrapIn"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;wrapIn"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;wrapIn"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="2" name="auxiliary;wrapIn"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;0">
+                <property value="locations" name="name"/>
+                <property value="4" name="auxiliary;wrapIn"/>
+                <property value="4" name="auxiliary;index"/>
+                <property-collection name="@http://www.springframework.org/schema/beans/list;1">
+                    <property value="5" name="auxiliary;wrapIn"/>
+                    <property value="5" name="auxiliary;index"/>
+                    <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                        <property value="classpath:/config.properties" name=""/>
+                        <property value="6" name="auxiliary;wrapIn"/>
+                        <property value="6" name="auxiliary;index"/>
+                    </property-collection>
+                </property-collection>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element type="http://www.mulesoft.org/schema/mule/mongo/config" name="Mongo DB" entity-id="Mongo DB#1">
+        <properties>
+            <property value="Mongo_DB" name="name"/>
+            <property value="7" name="auxiliary;index"/>
+            <property value="nialdarbey" name="username"/>
+            <property value="hello123" name="password"/>
+            <property value="7" name="auxiliary;index"/>
+            <property value="alex.mongohq.com" name="host"/>
+            <property value="10036" name="port"/>
+            <property value="se_knowledge_base" name="database"/>
+            <property name="connectTimeout"/>
+            <property name="connectionsPerHost"/>
+            <property name="maxWaitTime"/>
+            <property name="socketTimeout"/>
+            <property name="threadsAllowedToBlockForConnectionMultiplier"/>
+            <property name="w"/>
+            <property name="wtimeout"/>
+            <property name="autoConnectRetry"/>
+            <property name="fsync"/>
+            <property name="safe"/>
+            <property name="slaveOk"/>
+            <property value="7" name="auxiliary;index"/>
+            <property value="7" name="auxiliary;index"/>
+            <property value="7" name="auxiliary;index"/>
+            <property value="7" name="auxiliary;index"/>
+            <property value="7" name="auxiliary;index"/>
+        </properties>
+    </global-element>
+    <global-element type="http://www.mulesoft.org/schema/mule/pop3s/connector" name="POP3" entity-id="POP3#1">
+        <properties>
+            <property value="POP3" name="name"/>
+            <property value="8" name="auxiliary;index"/>
+            <property name="backupFolder"/>
+            <property name="mailboxFolder"/>
+            <property name="moveToFolder"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property value="8" name="auxiliary;index"/>
+            <property name="dynamicNotification"/>
+            <property value="true" name="validateConnections"/>
+            <property name="backupEnabled"/>
+            <property value="false" name="deleteReadMessages"/>
+            <property value="10000" name="checkFrequency"/>
+            <property name="defaultProcessMessageAction"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="http://www.mulesoft.org/schema/mule/pop3s/connector" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="main" entity-id="c0571c88-d8e6-4468-abe2-49bfbbef9efc">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="9" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="9" name="auxiliary;index"/>
+            <property value="9" name="auxiliary;index"/>
+            <property value="9" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#1">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/pop3s/endpoint" name="pre-sales" entity-id="POP3#2">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="pop.gmail.com" name="host"/>
+                    <property value="995" name="port"/>
+                    <property value="${email.user}" name="user"/>
+                    <property value="${email.password}" name="password"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property value="POP3" name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property value="http://www.mulesoft.org/schema/mule/pop3s/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property value="10" name="auxiliary;index"/>
+                    <property value="10" name="auxiliary;index"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Make Document" entity-id="Flow Reference#1">
+                <properties>
+                    <property value="make_document" name="name"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                    <property value="11" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#1">
+                <properties>
+                    <property value="#[payload]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="12" name="auxiliary;index"/>
+                    <property value="12" name="auxiliary;index"/>
+                    <property value="12" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" name="Insert Email" entity-id="Mongo DB#2">
+                <properties>
+                    <property value="Mongo_DB" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/insert-object" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Mongo_DB" name="config-ref"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="emails" name="collection"/>
+                    <property name="dbObject-ref"/>
+                    <property name="writeConcern"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property name=""/>
+                    <property name="username"/>
+                    <property name="password"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property value="13" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="make_document" entity-id="ba2f1ae6-cbe1-4cac-b2c1-742c7688736a">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="14" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="14" name="auxiliary;index"/>
+            <property value="14" name="auxiliary;index"/>
+            <property value="14" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
+            <splitter index="15" type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="Choice#1">
+                <properties>
+                    <property-collection name="5e035842-7e28-458c-acb1-59703e364462">
+                        <property value="true" name="choice.otherwise"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="ea2f3154-e7c8-4ca2-a84b-6843792333a4">
+                        <property value="#[message.outboundProperties['References'] == null]" name="choice.expression"/>
+                        <property-collection name="choice.attributes">
+                            <property value="#[message.outboundProperties['References'] == null]" name="expression"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="Choice#2"/>
+                <compartment entity-id="compartment#1">
+                    <lane isChoiceOtherwiseLane="false" index="17" hadOnlyOneElement="false" entity-id="ea2f3154-e7c8-4ca2-a84b-6843792333a4">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/variable-transformer" name="refId" entity-id="Variable#1">
+                            <properties>
+<property value="http://www.mulesoft.org/schema/mule/core/set-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+<property value="refId" name="variableName"/>
+<property value="NA" name="value"/>
+<property value="18" name="auxiliary;index"/>
+<property value="18" name="auxiliary;index"/>
+<property value="18" name="auxiliary;index"/>
+<property value="18" name="auxiliary;index"/>
+<property value="18" name="auxiliary;index"/>
+<property value="18" name="auxiliary;index"/>
+<property value="18" name="auxiliary;index"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                    <lane isChoiceOtherwiseLane="true" index="20" hadOnlyOneElement="false" entity-id="5e035842-7e28-458c-acb1-59703e364462">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/variable-transformer" name="refId" entity-id="Variable#2">
+                            <properties>
+<property value="http://www.mulesoft.org/schema/mule/core/set-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+<property value="refId" name="variableName"/>
+<property value="#[refs = message.outboundProperties['References']; refArray = refs.split('\t'); refArray[0]]" name="value"/>
+<property value="21" name="auxiliary;index"/>
+<property value="21" name="auxiliary;index"/>
+<property value="21" name="auxiliary;index"/>
+<property value="21" name="auxiliary;index"/>
+<property value="21" name="auxiliary;index"/>
+<property value="21" name="auxiliary;index"/>
+<property value="21" name="auxiliary;index"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/variable-transformer" name="messageId" entity-id="Variable#3">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/core/set-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="messageId" name="variableName"/>
+                    <property value="#[header:outbound:Message-ID]" name="value"/>
+                    <property value="22" name="auxiliary;index"/>
+                    <property value="22" name="auxiliary;index"/>
+                    <property value="22" name="auxiliary;index"/>
+                    <property value="22" name="auxiliary;index"/>
+                    <property value="22" name="auxiliary;index"/>
+                    <property value="22" name="auxiliary;index"/>
+                    <property value="22" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/variable-transformer" name="from" entity-id="Variable#4">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/core/set-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="from" name="variableName"/>
+                    <property value="#[header:outbound:inbound.fromAddress]" name="value"/>
+                    <property value="23" name="auxiliary;index"/>
+                    <property value="23" name="auxiliary;index"/>
+                    <property value="23" name="auxiliary;index"/>
+                    <property value="23" name="auxiliary;index"/>
+                    <property value="23" name="auxiliary;index"/>
+                    <property value="23" name="auxiliary;index"/>
+                    <property value="23" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/variable-transformer" name="subject" entity-id="Variable#5">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/core/set-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="subject" name="variableName"/>
+                    <property value="#[header:outbound:inbound.subject]" name="value"/>
+                    <property value="24" name="auxiliary;index"/>
+                    <property value="24" name="auxiliary;index"/>
+                    <property value="24" name="auxiliary;index"/>
+                    <property value="24" name="auxiliary;index"/>
+                    <property value="24" name="auxiliary;index"/>
+                    <property value="24" name="auxiliary;index"/>
+                    <property value="24" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#2">
+                <properties>
+                    <property value="#[flowVars.subject]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="25" name="auxiliary;index"/>
+                    <property value="25" name="auxiliary;index"/>
+                    <property value="25" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/variable-transformer" name="date" entity-id="Variable#6">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/core/set-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="date" name="variableName"/>
+                    <property value="#[header:outbound:sentDate]" name="value"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Transform to Document" entity-id="Expression#1">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property value="27" name="auxiliary;index"/>
+                    <property name="mimeType"/>
+                    <property value="27" name="auxiliary;index"/>
+                    <property value="27" name="auxiliary;index"/>
+                    <property value="27" name="auxiliary;index"/>
+                    <property name="evaluator"/>
+                    <property value="#[ with (document = new com.mulesoft.se.knowledge.Document()) { email = message.payload, subject = flowVars.subject, messageId = flowVars.messageId, refId = flowVars.refId, date = flowVars.date, from = flowVars.from }; document ]" name="expression"/>
+                    <property name="custom-evaluator"/>
+                    <property name="returnSourceIfNull"/>
+                    <property value="27" name="auxiliary;index"/>
+                    <property value="27" name="auxiliary;index"/>
+                    <property value="27" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/json/object-to-json-transformer" name="Object to JSON" entity-id="Object to JSON#1">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property value="28" name="auxiliary;index"/>
+                    <property name="mimeType"/>
+                    <property value="28" name="auxiliary;index"/>
+                    <property value="28" name="auxiliary;index"/>
+                    <property name="mapper-ref"/>
+                    <property name="sourceClass"/>
+                    <property value="28" name="auxiliary;index"/>
+                    <property value="28" name="auxiliary;index"/>
+                    <property value="28" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="find_initial_body" entity-id="96dcb02d-0fce-452e-a949-69ce9100d8fd">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="29" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="29" name="auxiliary;index"/>
+            <property value="29" name="auxiliary;index"/>
+            <property value="29" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#3">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/emails/initial/body" entity-id="Ajax#2">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="/emails/initial/body" name="channel"/>
+                    <property value="30" name="auxiliary;index"/>
+                    <property value="30" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="30" name="auxiliary;index"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="address"/>
+                    <property name="cacheMessages"/>
+                    <property name="messageCacheSize"/>
+                    <property value="30" name="auxiliary;index"/>
+                    <property value="30" name="auxiliary;index"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property value="30" name="auxiliary;index"/>
+                    <property value="30" name="auxiliary;index"/>
+                    <property value="30" name="auxiliary;index"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Find Email Body" entity-id="Flow Reference#2">
+                <properties>
+                    <property value="find_body" name="name"/>
+                    <property value="31" name="auxiliary;index"/>
+                    <property value="31" name="auxiliary;index"/>
+                    <property value="31" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="find_reply_body" entity-id="396a38c2-3c4c-4a50-a054-36b9aa1a7917">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="32" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="32" name="auxiliary;index"/>
+            <property value="32" name="auxiliary;index"/>
+            <property value="32" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#4">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/emails/reply/body" entity-id="Ajax#3">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="/emails/reply/body" name="channel"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="address"/>
+                    <property name="cacheMessages"/>
+                    <property name="messageCacheSize"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Find Email Body" entity-id="Flow Reference#3">
+                <properties>
+                    <property value="find_body" name="name"/>
+                    <property value="34" name="auxiliary;index"/>
+                    <property value="34" name="auxiliary;index"/>
+                    <property value="34" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="find_body" entity-id="7f27ad9a-a0ef-4fd0-af79-5ca3d81a6806">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="35" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="35" name="auxiliary;index"/>
+            <property value="35" name="auxiliary;index"/>
+            <property value="35" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#5">
+            <pattern type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" name="Find Email Body" entity-id="Mongo DB#3">
+                <properties>
+                    <property value="Mongo_DB" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/find-one-object" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Mongo_DB" name="config-ref"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property value="emails" name="collection"/>
+                    <property name="query-ref"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property name=""/>
+                    <property name="username"/>
+                    <property name="password"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property value="36" name="auxiliary;index"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-one-object-fieldss;0">
+                        <property value="37" name="auxiliary;wrapIn"/>
+                        <property value="37" name="auxiliary;index"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-one-object-fields;1">
+                            <property value="email" name="value"/>
+                            <property value="38" name="auxiliary;wrapIn"/>
+                            <property value="38" name="auxiliary;index"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/mongo/mongo-transformer" name="Transform to JSON" entity-id="Mongo DB#4">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/dbobject-to-json" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/dbobject-to-json" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property name="mimeType"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                    <property value="39" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="find_initial_emails" entity-id="5e6a959d-06f5-4de4-9402-b67427fb9a9d">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="40" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="40" name="auxiliary;index"/>
+            <property value="40" name="auxiliary;index"/>
+            <property value="40" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#6">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/emails/initial" entity-id="Ajax#4">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="/emails/initial" name="channel"/>
+                    <property value="41" name="auxiliary;index"/>
+                    <property value="41" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="41" name="auxiliary;index"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="address"/>
+                    <property name="cacheMessages"/>
+                    <property name="messageCacheSize"/>
+                    <property value="41" name="auxiliary;index"/>
+                    <property value="41" name="auxiliary;index"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property value="41" name="auxiliary;index"/>
+                    <property value="41" name="auxiliary;index"/>
+                    <property value="41" name="auxiliary;index"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" name="Find Initial Emails" entity-id="Mongo DB#5">
+                <properties>
+                    <property value="Mongo_DB" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/find-objects" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Mongo_DB" name="config-ref"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property value="emails" name="collection"/>
+                    <property value="#[payload]" name="query-ref"/>
+                    <property name="limit"/>
+                    <property name="numToSkip"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property name=""/>
+                    <property name="username"/>
+                    <property name="password"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property value="42" name="auxiliary;index"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fieldss;0">
+                        <property value="43" name="auxiliary;wrapIn"/>
+                        <property value="43" name="auxiliary;index"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fields;3">
+                            <property value="date" name="value"/>
+                            <property value="46" name="auxiliary;wrapIn"/>
+                            <property value="46" name="auxiliary;index"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fields;4">
+                            <property value="subject" name="value"/>
+                            <property value="47" name="auxiliary;wrapIn"/>
+                            <property value="47" name="auxiliary;index"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fields;1">
+                            <property value="messageId" name="value"/>
+                            <property value="44" name="auxiliary;wrapIn"/>
+                            <property value="44" name="auxiliary;index"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fields;2">
+                            <property value="from" name="value"/>
+                            <property value="45" name="auxiliary;wrapIn"/>
+                            <property value="45" name="auxiliary;index"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/mongo/mongo-transformer" name="Transform to Json" entity-id="Mongo DB#6">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/mongo-collection-to-json" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/mongo-collection-to-json" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="48" name="auxiliary;index"/>
+                    <property value="48" name="auxiliary;index"/>
+                    <property value="48" name="auxiliary;index"/>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property value="48" name="auxiliary;index"/>
+                    <property name="mimeType"/>
+                    <property value="48" name="auxiliary;index"/>
+                    <property value="48" name="auxiliary;index"/>
+                    <property value="48" name="auxiliary;index"/>
+                    <property value="48" name="auxiliary;index"/>
+                    <property value="48" name="auxiliary;index"/>
+                    <property value="48" name="auxiliary;index"/>
+                    <property value="48" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#3">
+                <properties>
+                    <property value="#[payload]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="49" name="auxiliary;index"/>
+                    <property value="49" name="auxiliary;index"/>
+                    <property value="49" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="find_initial_emailsXXX" entity-id="812d5976-a970-4c24-aa3e-1f5bfbbed406">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="50" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="50" name="auxiliary;index"/>
+            <property value="50" name="auxiliary;index"/>
+            <property value="50" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#7">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" name="Generate { &quot;refId&quot; : &quot;NA&quot; }" entity-id="Quartz#1">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="initialEmail" name="jobName"/>
+                    <property name="cronExpression"/>
+                    <property value="2000000" name="repeatInterval"/>
+                    <property name="repeatCount"/>
+                    <property name="startDelay"/>
+                    <property value="51" name="auxiliary;index"/>
+                    <property value="51" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="51" name="auxiliary;index"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property value="51" name="auxiliary;index"/>
+                    <property value="51" name="auxiliary;index"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property value="51" name="auxiliary;index"/>
+                    <property value="51" name="auxiliary;index"/>
+                    <property value="51" name="auxiliary;index"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/event-generator-job;0">
+                        <property value="initialEmail" name="groupName"/>
+                        <property value="initialEmail" name="jobGroupName"/>
+                        <property value="52" name="auxiliary;wrapIn"/>
+                        <property value="52" name="auxiliary;index"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/payload;1">
+                            <property value="{ &quot;refId&quot; : &quot;NA&quot; }" name="text"/>
+                            <property value="53" name="auxiliary;wrapIn"/>
+                            <property value="53" name="auxiliary;index"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" name="Find Initial Emails" entity-id="Mongo DB#7">
+                <properties>
+                    <property value="Mongo_DB" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/find-objects" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Mongo_DB" name="config-ref"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="emails" name="collection"/>
+                    <property value="#[payload]" name="query-ref"/>
+                    <property name="limit"/>
+                    <property name="numToSkip"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property name=""/>
+                    <property name="username"/>
+                    <property name="password"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property value="54" name="auxiliary;index"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fieldss;0">
+                        <property value="55" name="auxiliary;wrapIn"/>
+                        <property value="55" name="auxiliary;index"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fields;3">
+                            <property value="date" name="value"/>
+                            <property value="58" name="auxiliary;wrapIn"/>
+                            <property value="58" name="auxiliary;index"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fields;4">
+                            <property value="subject" name="value"/>
+                            <property value="59" name="auxiliary;wrapIn"/>
+                            <property value="59" name="auxiliary;index"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fields;1">
+                            <property value="messageId" name="value"/>
+                            <property value="56" name="auxiliary;wrapIn"/>
+                            <property value="56" name="auxiliary;index"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fields;2">
+                            <property value="from" name="value"/>
+                            <property value="57" name="auxiliary;wrapIn"/>
+                            <property value="57" name="auxiliary;index"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/mongo/mongo-transformer" name="Transform to Json" entity-id="Mongo DB#8">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/mongo-collection-to-json" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/mongo-collection-to-json" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property name="mimeType"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property value="60" name="auxiliary;index"/>
+                    <property value="60" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#4">
+                <properties>
+                    <property value="#[payload]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                    <property value="61" name="auxiliary;index"/>
+                    <property value="61" name="auxiliary;index"/>
+                    <property value="61" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/emails/initial" entity-id="Ajax#5">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="/emails/initial/xxx" name="channel"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="address"/>
+                    <property name="cacheMessages"/>
+                    <property name="messageCacheSize"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="62" name="auxiliary;index"/>
+                    <property value="62" name="auxiliary;index"/>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="find_reply_emails" entity-id="9b09426f-72f3-44be-a64f-94c4ea4fcea2">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property value="63" name="auxiliary;index"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="63" name="auxiliary;index"/>
+            <property value="63" name="auxiliary;index"/>
+            <property value="63" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#8">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/emails/reply" entity-id="Ajax#6">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="/emails/reply" name="channel"/>
+                    <property value="64" name="auxiliary;index"/>
+                    <property value="64" name="auxiliary;index"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="64" name="auxiliary;index"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="address"/>
+                    <property name="cacheMessages"/>
+                    <property name="messageCacheSize"/>
+                    <property value="64" name="auxiliary;index"/>
+                    <property value="64" name="auxiliary;index"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property value="64" name="auxiliary;index"/>
+                    <property value="64" name="auxiliary;index"/>
+                    <property value="64" name="auxiliary;index"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" name="Find Reply Emails" entity-id="Mongo DB#9">
+                <properties>
+                    <property value="Mongo_DB" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/find-objects" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Mongo_DB" name="config-ref"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property value="emails" name="collection"/>
+                    <property value="#[payload]" name="query-ref"/>
+                    <property name="limit"/>
+                    <property name="numToSkip"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property name=""/>
+                    <property name="username"/>
+                    <property name="password"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property value="65" name="auxiliary;index"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fieldss;0">
+                        <property value="66" name="auxiliary;wrapIn"/>
+                        <property value="66" name="auxiliary;index"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fields;1">
+                            <property value="messageId" name="value"/>
+                            <property value="67" name="auxiliary;wrapIn"/>
+                            <property value="67" name="auxiliary;index"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fields;2">
+                            <property value="from" name="value"/>
+                            <property value="68" name="auxiliary;wrapIn"/>
+                            <property value="68" name="auxiliary;index"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/mongo/mongo-transformer" name="Transform to Json" entity-id="Mongo DB#10">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/mongo-collection-to-json" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="http://www.mulesoft.org/schema/mule/mongo/mongo-collection-to-json" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="69" name="auxiliary;index"/>
+                    <property value="69" name="auxiliary;index"/>
+                    <property value="69" name="auxiliary;index"/>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property value="69" name="auxiliary;index"/>
+                    <property name="mimeType"/>
+                    <property value="69" name="auxiliary;index"/>
+                    <property value="69" name="auxiliary;index"/>
+                    <property value="69" name="auxiliary;index"/>
+                    <property value="69" name="auxiliary;index"/>
+                    <property value="69" name="auxiliary;index"/>
+                    <property value="69" name="auxiliary;index"/>
+                    <property value="69" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+</mule-configuration>
